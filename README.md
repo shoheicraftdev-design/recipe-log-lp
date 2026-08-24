@@ -2,7 +2,7 @@
 
 iPhone アプリ「レコログ」（内部名 RecipeLog）の製品紹介ページ。GitHub Pages で公開する想定。
 
-- 公開URL: https://shoheicraftdev-design.github.io/recipe-log-lp/ （未公開・これから作成）
+- 公開URL: https://shoheicraftdev-design.github.io/recipe-log-lp/ **公開済**（2026-08-24）
 - App Store: **公開中**。`https://apps.apple.com/jp/app/レコログ/id6803313611`
 - サポート / プライバシーポリシー / 利用規約: https://shoheicraftdev-design.github.io/recipe-log-support/
 
