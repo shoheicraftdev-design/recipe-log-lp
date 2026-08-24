@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レコログ — 作るたびに5つの軸で採点するレシピ記録</title>
+<meta name="description" content="ネットで見つけたレシピを保管して、作るたびに5つの軸で採点。総合★は平均ではなく「また作るか」というあなたの結論です。">
+<meta property="og:title" content="レコログ — 作るたびに5つの軸で採点するレシピ記録">
+<meta property="og:description" content="ネットで見つけたレシピを保管して、作るたびに5つの軸で採点。総合★は平均ではなく「また作るか」というあなたの結論です。">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f5f5f7;
+    --fg: #1c1c1e;
+    --fg-soft: #5a5a5f;
+    --line: #e3e3e6;
+    --accent: #b5602b;
+    --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111113;
+      --bg-soft: #1c1c1f;
+      --fg: #f2f2f4;
+      --fg-soft: #a8a8ae;
+      --line: #2e2e33;
+      --accent: #e39a68;
+      --card: #1c1c1f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    line-height: 1.85;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  /* hero */
+  .hero { text-align: center; padding: 72px 0 56px; }
+  .icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 20px; }
+  .mark {
+    display: inline-block; font-size: 0.8rem; letter-spacing: .12em;
+    color: var(--fg-soft); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 14px; margin-bottom: 22px;
+  }
+  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.35; margin: 0 0 18px; letter-spacing: .01em; }
+  .lead { font-size: clamp(1rem, 3.4vw, 1.15rem); color: var(--fg-soft); margin: 0 auto 32px; max-width: 34em; }
+  .cta {
+    display: inline-block; background: var(--fg); color: var(--bg);
+    text-decoration: none; font-weight: 600;
+    padding: 14px 30px; border-radius: 999px; font-size: 1rem;
+  }
+  .cta:hover { opacity: .85; }
+  .cta-note { display: block; margin-top: 12px; font-size: .85rem; color: var(--fg-soft); }
+
+  h2 { font-size: clamp(1.3rem, 4.6vw, 1.7rem); margin: 0 0 10px; line-height: 1.45; }
+  h3 { font-size: 1.05rem; margin: 0 0 6px; }
+  .sub { color: var(--fg-soft); margin: 0 0 30px; }
+  p { margin: 0 0 1em; }
+
+  /* axis list */
+  .axes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 26px 0; list-style: none; padding: 0; }
+  .axes li {
+    background: var(--bg-soft); border-radius: 14px; padding: 16px 18px;
+    font-size: .95rem;
+  }
+  @media (max-width: 560px) { .axes { grid-template-columns: 1fr; } }
+
+  /* feature rows */
+  .row { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: center; }
+  .row.flip { grid-template-columns: 260px 1fr; }
+  .row.flip .shot { order: -1; }
+  .shot img {
+    width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto;
+    border-radius: 22px; border: 1px solid var(--line);
+  }
+  @media (max-width: 720px) {
+    .row, .row.flip { grid-template-columns: 1fr; gap: 26px; }
+    .row.flip .shot { order: 0; }
+  }
+
+  .tag {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+    padding: 2px 9px; border-radius: 6px; vertical-align: middle; margin-left: 8px;
+  }
+  .tag.free { background: #e5f3e8; color: #256b36; }
+  .tag.pro  { background: #efe7fb; color: #5a3ba8; }
+  @media (prefers-color-scheme: dark) {
+    .tag.free { background: #1e3a26; color: #9ad9ac; }
+    .tag.pro  { background: #2e2545; color: #c3aaf2; }
+  }
+
+  ul { padding-left: 1.3em; margin: 0 0 1em; }
+  li { margin-bottom: .4em; }
+  .note { background: var(--bg-soft); border-radius: 14px; padding: 20px 22px; color: var(--fg-soft); font-size: .94rem; }
+  a { color: var(--accent); }
+
+  footer { padding: 40px 0 64px; font-size: .9rem; color: var(--fg-soft); text-align: center; }
+  footer a { margin: 0 10px; display: inline-block; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="icon" src="images/appicon.png" alt="レコログ アプリアイコン">
+    <span class="mark">iPhone アプリ</span>
+    <h1>作っておいしかった。<br>それで終わっていませんか。</h1>
+    <p class="lead">
+      レコログは、ネットで見つけた参考レシピを保管して、作るたびに採点を残していくアプリです。<br>
+      良し悪しが付くのは「料理名」ではなく「そのレシピ」——次に作るときに思い出せます。
+    </p>
+    <a class="cta" href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611">App Store で見る</a>
+    <span class="cta-note">マイレシピ20件まで無料。21件以上とiCloud同期が買い切り ¥480 です</span>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <h2>「また作るか」が、記録として積み上がる</h2>
+        <p>タイムラインには、レシピをまたいで作った記録が新しい順に並びます。料理写真・カテゴリ・5軸の点数・総合★が一目で分かり、料理名で絞り込むこともできます。</p>
+        <p class="sub" style="margin-bottom:0">保存して終わりではなく、作るたびに記録が積み上がっていくアプリです。</p>
+      </div>
+      <div class="shot"><img src="images/shot-timeline.png" alt="タイムライン画面。作った記録が新しい順に並び、料理写真・カテゴリ・5軸・総合★が表示されている" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row flip">
+      <div class="shot"><img src="images/shot-rating.png" alt="作った記録の採点画面。5つの軸それぞれに点数を付け、5軸とは別に総合★を選ぶ" loading="lazy"></div>
+      <div>
+        <h2>作るたびに、5つの軸で採点</h2>
+        <ul class="axes">
+          <li>⏱ 時間どおり</li>
+          <li>📖 説明のわかりやすさ</li>
+          <li>🛒 手に入りやすさ</li>
+          <li>🔧 手間</li>
+          <li>😋 満足度</li>
+        </ul>
+        <p class="sub" style="margin-bottom:0">そして総合★は、5軸の平均ではありません。「結局これは また作るのか」——あなたの結論を、独立して残します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <h2>保管するのは「参照先」と「自分のメモ」</h2>
+        <p>参考レシピは URL か写真のどちらか1つ。材料や作り方の本文は書き写しません。実体はいつも参照先にあります。自分用の手順メモと代表写真だけを、自分の言葉で残してください。</p>
+        <p class="sub" style="margin-bottom:0">1品のレシピに、作った記録が何件も積み上がっていきます。</p>
+      </div>
+      <div class="shot"><img src="images/shot-detail.png" alt="レシピ詳細画面。大きな料理写真と自分の手順メモ、作った記録が複数件並んでいる" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row flip">
+      <div class="shot"><img src="images/shot-recipes.png" alt="マイレシピ一覧画面。カテゴリ単位で開閉でき、件数が表示されている" loading="lazy"></div>
+      <div>
+        <h2>気に入ったレシピを、カテゴリで集める</h2>
+        <p>マイレシピはカテゴリごとにまとまって表示され、見出しをタップすれば開閉できます。同じ料理名でも参考レシピが違えば、レコログでは別のものとして扱います。</p>
+        <p class="sub" style="margin-bottom:0">どのレシピが良かったのかを、次に作るときに思い出せます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>こんな人に</h2>
+    <ul>
+      <li>ネットのレシピや動画を見て、その通りに作っている</li>
+      <li>気に入ったレシピをブックマークしているが、どれが良かったか思い出せない</li>
+      <li>同じ料理を何度か作って、自分に合うレシピを見つけたい</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>料金について</h2>
+    <p><strong>マイレシピの登録は20件まで、作った記録の追加は無制限に無料です。</strong>写真・採点・メモ・タイムライン・絞り込みはすべて使えます。</p>
+    <p>マイレシピ21件以上＋iCloud同期<span class="tag pro">買い切り ¥480</span>だけが有料です。購入すると、機種変更や複数端末でも記録が引き継がれます。一度の購入で、月額・年額の課金はありません。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>データの扱い</h2>
+    <p>
+      解析 SDK・広告 SDK・トラッキングは入れていません。写真はアプリ内に複製せず、写真ライブラリの写真を参照します。
+    </p>
+    <p>iCloud 同期はご自身のプライベートな iCloud にのみ保存され、開発者を含む第三者はアクセスできません。</p>
+    <div class="note">
+      こんな方に向いています——同じ料理名でも作るたびに味が違う経験がある方、レシピをブックマークするだけで終わっている方、次に何を作るか自分の記録から決めたい方。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a class="cta" href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611">App Store で見る</a></p>
+    <p style="margin-top:26px">
+      <a href="https://shoheicraftdev-design.github.io/recipe-log-support/">サポート・使い方</a>
+      <a href="https://shoheicraftdev-design.github.io/recipe-log-support/privacy.html">プライバシーポリシー</a>
+      <a href="https://shoheicraftdev-design.github.io/recipe-log-support/terms.html">利用規約</a>
+      <a href="mailto:shohei.craft.dev@gmail.com">お問い合わせ</a>
+    </p>
+    <p style="margin-top:18px">ShoheiCraftDev</p>
+  </div>
+</footer>
+
+</body>
+</html>
