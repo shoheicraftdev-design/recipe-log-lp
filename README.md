@@ -9,12 +9,17 @@ iPhone アプリ「レコログ」（内部名 RecipeLog）の製品紹介ペー
 ## 位置づけ
 
 Sodato LP（`sodato-lp`）・GearDeban LP（`geardeban-lp`）・えも日LP（`emo-diary-lp`）と同じく、**匿名ライン（note・Xで製品名を出さない）を維持したまま
-アプリ名とストアURLを出せるチャネル**。ASC のマーケティングURLに設定する想定。
+アプリ名とストアURLを出せるチャネル**。ASC のマーケティングURLには**未設定**（v1.0・v1.1 とも。`recipe-log/docs/appstore/ver-1.1-submission.md` #31）。
 サポート・法務ページは別リポジトリ `recipe-log-support` が持つ（ここには置かない）。
 
 ## 内容の版
 
-**v1.0（2026-08-24 App Store 公開・build 2）に合わせて作成。** 参照: `recipe-log/docs/appstore/v1-store-listing.md`
+**v1.1（公開中・build 3）に合わせて更新（2026-09-28・決裁 `d-yso5qm`）。** v1.0（2026-08-24 公開・build 2）で作成。
+参照: `recipe-log/docs/appstore/v1.1-store-listing.md`（v1.1 で変わる項目の差分）・`ver-1.1-submission.md`（ASC 入力値の一覧）。
+差分に無い項目は `v1-store-listing.md` が正本。
+
+- 見出し・リード = v1.1 説明文の書き出しと要約文／title・og:title = v1.1 サブタイトル／meta description・og:description = v1.1 プロモーションテキスト
+- 本文の節の並び = v1.1 説明文の順（保管 → 良し悪しはそのレシピに付く → 採点 → タイムライン）。芯は「保管が主・記録は従」（決裁 `d-f3js8s`）
 
 ## 素材
 
@@ -30,8 +35,9 @@ Sodato LP（`sodato-lp`）・GearDeban LP（`geardeban-lp`）・えも日LP（`e
 | `shot-detail.png` | `03-detail.png`（レシピ詳細） |
 | `shot-recipes.png` | `04-recipes.png`（マイレシピ一覧・カテゴリ単位） |
 
-## 文言のルール（アプリ側 `docs/appstore/v1-store-listing.md` を継承）
+## 文言のルール（アプリ側 `docs/appstore/v1-store-listing.md`・`v1.1-store-listing.md` を継承）
 
+- LP で新しい言い回しを作らない。ASC に出した文言を使う。
 - 総合★は「5軸の平均」ではなく「また作るかという独立した結論」——ここを曖昧にしない。
 - 良し悪しが付くのは「料理名」ではなく「そのレシピ（参照先）」——同じ料理名でも別レシピとして扱われる点を混同しない。
 - 本文・材料は書き写さない設計（参照はURLか写真のどちらか1つ＋自分のメモ）——「レシピを丸ごと保存できる」というような誤読を招く表現はしない。
