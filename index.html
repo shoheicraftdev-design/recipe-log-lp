@@ -8,219 +8,290 @@
 <meta property="og:title" content="レコログ — あのレシピで作った料理を記録">
 <meta property="og:description" content="保存したレシピは増えていくのに、作ったのはどれだったか。レコログは参考レシピをURLか写真1つで保管し、作るたびの記録をそのレシピに紐づけます。記録は5軸の採点で残せます。">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #ffffff;
-    --bg-soft: #f5f5f7;
-    --fg: #1c1c1e;
-    --fg-soft: #5a5a5f;
-    --line: #e3e3e6;
-    --accent: #b5602b;
-    --card: #ffffff;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111113;
-      --bg-soft: #1c1c1f;
-      --fg: #f2f2f4;
-      --fg-soft: #a8a8ae;
-      --line: #2e2e33;
-      --accent: #e39a68;
-      --card: #1c1c1f;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
-    line-height: 1.85;
-    color: var(--fg);
-    background: var(--bg);
-    font-size: 16px;
-  }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: none; }
-
-  /* hero */
-  .hero { text-align: center; padding: 72px 0 56px; }
-  .icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 20px; }
-  .mark {
-    display: inline-block; font-size: 0.8rem; letter-spacing: .12em;
-    color: var(--fg-soft); border: 1px solid var(--line);
-    border-radius: 999px; padding: 4px 14px; margin-bottom: 22px;
-  }
-  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.35; margin: 0 0 18px; letter-spacing: .01em; }
-  .lead { font-size: clamp(1rem, 3.4vw, 1.15rem); color: var(--fg-soft); margin: 0 auto 32px; max-width: 34em; }
-  .cta {
-    display: inline-block; background: var(--fg); color: var(--bg);
-    text-decoration: none; font-weight: 600;
-    padding: 14px 30px; border-radius: 999px; font-size: 1rem;
-  }
-  .cta:hover { opacity: .85; }
-  .cta-note { display: block; margin-top: 12px; font-size: .85rem; color: var(--fg-soft); }
-
-  h2 { font-size: clamp(1.3rem, 4.6vw, 1.7rem); margin: 0 0 10px; line-height: 1.45; }
-  h3 { font-size: 1.05rem; margin: 0 0 6px; }
-  .sub { color: var(--fg-soft); margin: 0 0 30px; }
-  p { margin: 0 0 1em; }
-
-  /* axis list */
-  .axes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 26px 0; list-style: none; padding: 0; }
-  .axes li {
-    background: var(--bg-soft); border-radius: 14px; padding: 16px 18px;
-    font-size: .95rem;
-  }
-  @media (max-width: 560px) { .axes { grid-template-columns: 1fr; } }
-
-  /* feature rows */
-  .row { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: center; }
-  .row.flip { grid-template-columns: 260px 1fr; }
-  .row.flip .shot { order: -1; }
-  .shot img {
-    width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto;
-    border-radius: 22px; border: 1px solid var(--line);
-  }
-  @media (max-width: 720px) {
-    .row, .row.flip { grid-template-columns: 1fr; gap: 26px; }
-    .row.flip .shot { order: 0; }
-  }
-
-  .tag {
-    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em;
-    padding: 2px 9px; border-radius: 6px; vertical-align: middle; margin-left: 8px;
-  }
-  .tag.free { background: #e5f3e8; color: #256b36; }
-  .tag.pro  { background: #efe7fb; color: #5a3ba8; }
-  @media (prefers-color-scheme: dark) {
-    .tag.free { background: #1e3a26; color: #9ad9ac; }
-    .tag.pro  { background: #2e2545; color: #c3aaf2; }
-  }
-
-  ul { padding-left: 1.3em; margin: 0 0 1em; }
-  li { margin-bottom: .4em; }
-  .note { background: var(--bg-soft); border-radius: 14px; padding: 20px 22px; color: var(--fg-soft); font-size: .94rem; }
-  a { color: var(--accent); }
-
-  footer { padding: 40px 0 64px; font-size: .9rem; color: var(--fg-soft); text-align: center; }
-  footer a { margin: 0 10px; display: inline-block; }
+body{margin:0;background:#FFFFFF}
+a{color:#B84F0C}a:hover{color:#8A3A08}
+.rl *{box-sizing:border-box}
+.rl p{margin:0}
+.paper{background-color:#FFFCF7;background-image:linear-gradient(rgba(184,79,12,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(184,79,12,.07) 1px,transparent 1px);background-size:28px 28px}
+.mark{background:linear-gradient(transparent 64%,#FFD8B0 64%)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:24px;padding-right:24px}
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:72px;align-items:center}
+.split.flip{grid-template-columns:320px minmax(0,1fr)}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.axes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1.1fr);gap:12px;align-items:center}
+.phone{width:100%;max-width:300px;display:block;border-radius:40px;border:8px solid #1F1A17;box-shadow:0 30px 60px -20px rgba(60,30,10,.35)}
+.floatcard{position:absolute;left:-40px;bottom:56px;width:270px}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:#1F1A17;color:#FFFFFF;text-decoration:none;font-weight:700;font-size:16px}
+.cta-btn:hover{background:#3A302A;color:#FFFFFF}
+.cta-btn.light{background:#FFFFFF;color:#1F1A17}
+.cta-btn.light:hover{background:#FFE9D6;color:#1F1A17}
+.foot a{color:#E9DDD3;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.foot a:hover{color:#FFFFFF;text-decoration:underline}
+@media (max-width:900px){
+.hero,.split,.split.flip{grid-template-columns:minmax(0,1fr);gap:40px}
+.split.flip .shot{order:2}
+.axes{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols3{grid-template-columns:minmax(0,1fr)}
+.flow{grid-template-columns:minmax(0,1fr)}
+.flow .arrow{transform:rotate(90deg);justify-self:center}
+.floatcard{position:static;width:auto;margin-top:20px}
+.shot{justify-self:center}
+}
+@media (max-width:600px){
+.cols2{grid-template-columns:minmax(0,1fr)}
+.hide-sm{display:none}
+}
 </style>
 </head>
 <body>
+<div class="rl" style="font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif; color: #1F1A17; background: #FFFFFF; line-height: 1.85; font-size: 16px">
 
-<header class="hero">
-  <div class="wrap">
-    <img class="icon" src="images/appicon.png" alt="レコログ アプリアイコン">
-    <span class="mark">iPhone アプリ</span>
-    <h1>あの料理、どのレシピで作ったんだっけ。</h1>
-    <p class="lead">
-      ブックマークは増えていくのに、あのときの1本が出てこない。<br>
-      レコログは、ネットで見つけた参考レシピを保管しておくアプリです。作るたびの「また作るか」も、そのレシピに紐づけて記録していきます。
-    </p>
-    <a class="cta" href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611">App Store で見る</a>
-    <span class="cta-note">マイレシピ20件まで無料（広告つき）。21件以上・iCloud同期・広告なしが買い切り ¥480 です</span>
-  </div>
+<!-- header -->
+<header style="border-bottom: 1px solid #EEE6DE; background: #FFFFFF">
+<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px">
+<div style="display: flex; align-items: center; gap: 12px">
+<img src="images/appicon.png" alt="" style="width: 36px; height: 36px; border-radius: 9px; border: 1px solid #EEE6DE">
+<span style="font-weight: 900; font-size: 19px; letter-spacing: .04em">レコログ</span>
+</div>
+<a href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid #1F1A17; color: #1F1A17; text-decoration: none; font-weight: 700; font-size: 14px">App Store で見る</a>
+</div>
 </header>
 
-<section>
-  <div class="wrap">
-    <div class="row">
-      <div>
-        <h2>保管するのは「参照先」と「自分のメモ」</h2>
-        <p>参考レシピは URL か写真のどちらか1つ。材料や作り方の本文は書き写しません。実体はいつも参照先にあります。自分用の手順メモと代表写真だけを、自分の言葉で残してください。</p>
-        <p class="sub" style="margin-bottom:0">1品のレシピに、作った記録が何件も積み上がっていきます。</p>
-      </div>
-      <div class="shot"><img src="images/shot-detail.png" alt="レシピ詳細画面。大きな料理写真と自分の手順メモ、作った記録が複数件並んでいる" loading="lazy"></div>
-    </div>
-  </div>
+<!-- hero -->
+<section class="paper" style="padding: 88px 0 96px; border-bottom: 1px solid #EEE6DE">
+<div class="wrap hero">
+<div style="display: flex; flex-direction: column; gap: 28px; align-items: flex-start">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: #B84F0C; background: #FFFFFF; border: 1px solid #F1D6BF; border-radius: 999px; padding: 4px 14px">iPhone アプリ</span>
+<h1 style="margin: 0; font-size: clamp(36px, 5.4vw, 66px); line-height: 1.32; font-weight: 900; letter-spacing: .01em">あの料理、<br><span class="mark">どのレシピ</span>で<br>作ったんだっけ。</h1>
+<p style="font-size: clamp(16px, 1.6vw, 18px); color: #4E443D; max-width: 30em">ブックマークは増えていくのに、あのときの1本が出てこない。<br>レコログは、ネットで見つけた参考レシピを保管しておくアプリです。作るたびの「また作るか」も、そのレシピに紐づけて記録していきます。</p>
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+<a class="cta-btn" href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611">App Store で見る<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+<p style="font-size: 13px; color: #6A5E55">マイレシピ20件まで無料（広告つき）。21件以上・iCloud同期・広告なしは買い切り ¥480</p>
+</div>
+</div>
+<div class="shot" style="position: relative; justify-self: center; width: 100%; max-width: 330px">
+<img class="phone" src="images/shot-detail.png" alt="レシピ詳細画面。料理写真と自分のメモ、作った記録が2件並んでいる" style="transform: rotate(2.5deg)">
+<div class="floatcard" style="background: #FFFFFF; border: 1px solid #EEE6DE; border-radius: 18px; padding: 18px 20px; box-shadow: 0 16px 40px -16px rgba(60,30,10,.3); display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #6A5E55">2026/8/4</span>
+<span style="font-size: 15px; font-weight: 700"><span style="color: #E58A1F">★</span> <span style="font-family: 'DM Mono', monospace">4.5</span></span>
+</div>
+<p style="font-size: 15px; font-weight: 500; line-height: 1.6">焦げつきかけたので、次は途中で混ぜる。</p>
+<span style="font-size: 12px; color: #B84F0C; font-weight: 700">作った記録 ・ 青菜炒め</span>
+</div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="row flip">
-      <div class="shot"><img src="images/shot-recipes.png" alt="マイレシピ一覧画面。カテゴリ単位で開閉でき、件数が表示されている" loading="lazy"></div>
-      <div>
-        <h2>良し悪しは「料理名」ではなく「そのレシピ」に付く</h2>
-        <p>おいしかったのは「鶏の照り焼き」ではなく「あのサイトの鶏の照り焼き」です。レコログは同じ料理名でも参考レシピが違えば別のものとして扱います。マイレシピはカテゴリごとにまとまって表示され、見出しをタップすれば開閉できます。</p>
-        <p class="sub" style="margin-bottom:0">どのレシピが良かったのかを、次に作るときに思い出せます。</p>
-      </div>
-    </div>
-  </div>
+<!-- 01 保管 -->
+<section style="padding: 112px 0">
+<div class="wrap" style="display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px">
+<span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #B84F0C; letter-spacing: .1em">01 — 保管</span>
+<h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.4; font-weight: 900">保管するのは「参照先」と「自分のメモ」</h2>
+<p style="color: #4E443D">参考レシピは URL か写真のどちらか1つ。材料や作り方の本文は書き写しません。<br>実体はいつも参照先にあります。自分用の手順メモと代表写真だけを、自分の言葉で残してください。</p>
+</div>
+<div class="flow">
+<div style="border: 1.5px solid #1F1A17; border-radius: 20px; padding: 24px; background: #FFFFFF; display: flex; flex-direction: column; gap: 12px; min-height: 180px">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B84F0C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 700">参照先</h3>
+<p style="font-size: 14px; color: #4E443D; line-height: 1.7">URL か写真の、どちらか1つ</p>
+</div>
+<svg class="arrow" width="40" height="24" viewBox="0 0 40 24" fill="none" stroke="#C9B8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h26"></path><path d="M26 6l6 6-6 6"></path></svg>
+<div style="border: 1.5px solid #1F1A17; border-radius: 20px; padding: 24px; background: #FFFFFF; display: flex; flex-direction: column; gap: 12px; min-height: 180px">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B84F0C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="M13.5 6.5l4 4"></path></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 700">自分のメモ</h3>
+<p style="font-size: 14px; color: #4E443D; line-height: 1.7">手順メモと代表写真を、自分の言葉で</p>
+</div>
+<svg class="arrow" width="40" height="24" viewBox="0 0 40 24" fill="none" stroke="#C9B8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h26"></path><path d="M26 6l6 6-6 6"></path></svg>
+<div style="position: relative; padding: 0 12px 12px 0">
+<div style="position: absolute; left: 12px; top: 12px; right: 0; bottom: 0; border-radius: 20px; background: #FFE3C8"></div>
+<div style="position: absolute; left: 6px; top: 6px; right: 6px; bottom: 6px; border-radius: 20px; background: #FFF1E3; border: 1px solid #F1D6BF"></div>
+<div style="position: relative; border-radius: 20px; padding: 24px; background: #B84F0C; color: #FFFFFF; display: flex; flex-direction: column; gap: 12px; min-height: 180px">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 9h8"></path><path d="M8 13h8"></path><path d="M8 17h5"></path></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 700">作った記録</h3>
+<p style="font-size: 14px; line-height: 1.7">1品のレシピに、作るたび何件も積み上がる</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="row">
-      <div>
-        <h2>作るたびに、5つの軸で採点</h2>
-        <ul class="axes">
-          <li>⏱ 時間どおり</li>
-          <li>📖 説明のわかりやすさ</li>
-          <li>🛒 手に入りやすさ</li>
-          <li>🔧 手間</li>
-          <li>😋 満足度</li>
-        </ul>
-        <p class="sub" style="margin-bottom:0">そして総合★は、5軸の平均ではありません。「結局これは また作るのか」——あなたの結論を、独立して残します。</p>
-      </div>
-      <div class="shot"><img src="images/shot-rating.png" alt="作った記録の採点画面。5つの軸それぞれに点数を付け、5軸とは別に総合★を選ぶ" loading="lazy"></div>
-    </div>
-  </div>
+<!-- 02 そのレシピに付く -->
+<section class="paper" style="padding: 112px 0; border-top: 1px solid #EEE6DE; border-bottom: 1px solid #EEE6DE">
+<div class="wrap split">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #B84F0C; letter-spacing: .1em">02 — 紐づけ</span>
+<h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.4; font-weight: 900">良し悪しは「料理名」ではなく<br class="hide-sm"><span class="mark">「そのレシピ」</span>に付く</h2>
+<p style="color: #4E443D">おいしかったのは「鶏の照り焼き」ではなく「あのサイトの鶏の照り焼き」です。<br>レコログは同じ料理名でも参考レシピが違えば別のものとして扱います。<br>マイレシピはカテゴリごとにまとまって表示され、見出しをタップすれば開閉できます。</p>
+<div class="cols2" style="margin-top: 8px">
+<div style="background: #FFFFFF; border: 1px solid #EEE6DE; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 700; color: #6A5E55">参考レシピ A</span>
+<span style="font-size: 17px; font-weight: 700">鶏の照り焼き</span>
+<span style="font-size: 13px; color: #6A5E55">あのサイトのレシピ</span>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #EEE6DE; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 700; color: #6A5E55">参考レシピ B</span>
+<span style="font-size: 17px; font-weight: 700">鶏の照り焼き</span>
+<span style="font-size: 13px; color: #6A5E55">別の動画のレシピ</span>
+</div>
+</div>
+<p style="font-size: 14px; font-weight: 700; color: #B84F0C">同じ料理名でも、記録は別々に残ります。どのレシピが良かったのかを、次に作るときに思い出せます。</p>
+</div>
+<div class="shot"><img class="phone" loading="lazy" src="images/shot-recipes.png" alt="マイレシピ一覧画面。カテゴリ単位で開閉でき、件数が表示されている"></div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="row flip">
-      <div class="shot"><img src="images/shot-timeline.png" alt="タイムライン画面。作った記録が新しい順に並び、料理写真・カテゴリ・5軸・総合★が表示されている" loading="lazy"></div>
-      <div>
-        <h2>集めた記録を横断して振り返る</h2>
-        <p style="margin-bottom:0">タイムラインには、レシピをまたいで作った記録が新しい順に並びます。カテゴリと5軸の点数が一目で分かり、料理名で絞り込めます。</p>
-      </div>
-    </div>
-  </div>
+<!-- 03 採点 -->
+<section style="padding: 112px 0; background: #1F1A17; color: #FFFFFF">
+<div class="wrap split flip">
+<div class="shot"><img class="phone" loading="lazy" src="images/shot-rating.png" alt="作った記録の採点画面。5つの軸それぞれに点数を付け、5軸とは別に総合の星を選ぶ" style="border-color: #3A302A"></div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #FFB27A; letter-spacing: .1em">03 — 採点</span>
+<h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.4; font-weight: 900">作るたびに、5つの軸で採点</h2>
+<div class="axes">
+<div style="background: #2C2520; border-radius: 16px; padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2"></path><path d="M10 2h4"></path></svg>
+<span style="font-size: 14px; font-weight: 700; line-height: 1.5">時間どおり</span>
+</div>
+<div style="background: #2C2520; border-radius: 16px; padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"></path><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"></path></svg>
+<span style="font-size: 14px; font-weight: 700; line-height: 1.5">説明のわかりやすさ</span>
+</div>
+<div style="background: #2C2520; border-radius: 16px; padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12.4a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2L21 8H6"></path></svg>
+<span style="font-size: 14px; font-weight: 700; line-height: 1.5">手に入りやすさ</span>
+</div>
+<div style="background: #2C2520; border-radius: 16px; padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.3L3 18l3 3 6.4-6.3a4 4 0 0 0 5.3-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg>
+<span style="font-size: 14px; font-weight: 700; line-height: 1.5">手間</span>
+</div>
+<div style="background: #2C2520; border-radius: 16px; padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9.5h.01"></path><path d="M15 9.5h.01"></path></svg>
+<span style="font-size: 14px; font-weight: 700; line-height: 1.5">満足度</span>
+</div>
+</div>
+<div style="border: 1.5px solid #FFB27A; border-radius: 20px; padding: 24px 26px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap">
+<span style="font-size: 22px; font-weight: 900">総合 <span style="color: #FFB27A">★</span></span>
+<span style="font-size: 14px; color: #E9DDD3">5軸の平均ではありません</span>
+</div>
+<p style="color: #F3EAE2">「結局これは また作るのか」——あなたの結論を、独立して残します。</p>
+</div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>こんな人に</h2>
-    <ul>
-      <li>ネットのレシピや動画を見て、その通りに作っている</li>
-      <li>気に入ったレシピをブックマークしているが、どれが良かったか思い出せない</li>
-      <li>同じ料理を何度か作って、自分に合うレシピを見つけたい</li>
-    </ul>
-  </div>
+<!-- 04 振り返り -->
+<section style="padding: 112px 0">
+<div class="wrap split">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #B84F0C; letter-spacing: .1em">04 — 振り返り</span>
+<h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.4; font-weight: 900">集めた記録を横断して振り返る</h2>
+<p style="color: #4E443D">タイムラインには、レシピをまたいで作った記録が新しい順に並びます。<br>カテゴリと5軸の点数が一目で分かり、料理名で絞り込めます。</p>
+<div style="margin-top: 12px; background: #FFF6EC; border: 1px solid #F1D6BF; border-radius: 20px; padding: 24px 26px; display: flex; flex-direction: column; gap: 10px">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #FFFFFF; background: #B84F0C; border-radius: 6px; padding: 2px 10px">ver 2.0</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 700; line-height: 1.5">レシピを選ばずに、料理名だけでも記録</h3>
+<p style="font-size: 15px; color: #4E443D">レシピを登録していない料理も、料理名を入れて記録できます。<br>記録はタイムラインに並びます。</p>
+</div>
+</div>
+<div class="shot"><img class="phone" loading="lazy" src="images/shot-timeline.png" alt="タイムライン画面。作った記録が新しい順に並び、料理写真・カテゴリ・5軸・総合の星が表示されている"></div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>料金について</h2>
-    <p><strong>マイレシピの登録は20件まで、作った記録の追加は無制限に無料です。</strong>写真・採点・メモ・タイムライン・絞り込みはすべて使えます。無料のあいだは「マイレシピ」と「タイムライン」の画面下部に広告が表示されます。</p>
-    <p>マイレシピ21件以上＋iCloud同期＋広告なし<span class="tag pro">買い切り ¥480</span>だけが有料です。購入すると、機種変更や複数端末でも記録が引き継がれ、広告が表示されなくなります。一度の購入で、月額・年額の課金はありません。</p>
-  </div>
+<!-- こんな人に -->
+<section class="paper" style="padding: 104px 0; border-top: 1px solid #EEE6DE; border-bottom: 1px solid #EEE6DE">
+<div class="wrap" style="display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.4; font-weight: 900">こんな人に</h2>
+<div class="cols3">
+<div style="background: #FFFFFF; border: 1px solid #EEE6DE; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'DM Mono', monospace; font-size: 28px; color: #B84F0C">01</span>
+<p style="font-size: 16px; font-weight: 500; line-height: 1.75">ネットのレシピや動画を見て、その通りに作っている</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #EEE6DE; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'DM Mono', monospace; font-size: 28px; color: #B84F0C">02</span>
+<p style="font-size: 16px; font-weight: 500; line-height: 1.75">気に入ったレシピをブックマークしているが、どれが良かったか思い出せない</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #EEE6DE; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'DM Mono', monospace; font-size: 28px; color: #B84F0C">03</span>
+<p style="font-size: 16px; font-weight: 500; line-height: 1.75">同じ料理を何度か作って、自分に合うレシピを見つけたい</p>
+</div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>データの扱い</h2>
-    <p>
-      解析 SDK は入れていません。広告の表示に Google の広告 SDK（AdMob）を使っていて、トラッキングを許可した場合は広告識別子が使われます。許可しなくても使えます（広告の内容が関心に沿わなくなるだけです）。「レコログ Pro」を購入すると広告は表示されません。写真はアプリ内に複製せず、写真ライブラリの写真を参照します。
-    </p>
-    <p>iCloud 同期はご自身のプライベートな iCloud にのみ保存され、開発者を含む第三者はアクセスできません。</p>
-  </div>
+<!-- 料金 -->
+<section style="padding: 112px 0">
+<div class="wrap" style="display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.4; font-weight: 900">料金</h2>
+<p style="color: #4E443D">月額・年額の課金はありません。</p>
+</div>
+<div class="cols2" style="align-items: stretch">
+<div style="border: 1px solid #E2D6CB; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<h3 style="margin: 0; font-size: 22px; font-weight: 900">無料</h3>
+<span style="font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500">¥0</span>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.7">
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>マイレシピの登録は20件まで</span></li>
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>レシピを選ばずに料理名で残した記録は、20件に数えません</span></li>
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>作った記録の追加は無制限</span></li>
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>写真・採点・メモ・タイムライン・絞り込みはすべて使えます</span></li>
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>マイレシピとタイムラインの画面の下に、広告が表示されます</span></li>
+</ul>
+</div>
+<div style="border: 2px solid #B84F0C; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 20px; background: #FFF9F3">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<h3 style="margin: 0; font-size: 22px; font-weight: 900">レコログ Pro</h3>
+<span style="display: flex; align-items: baseline; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: #B84F0C">買い切り</span><span style="font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500">¥480</span></span>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.7">
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>マイレシピを21件以上登録できます</span></li>
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>iCloud 同期が有効になり、機種変更や複数端末でも記録が引き継がれます</span></li>
+<li style="display: flex; gap: 10px"><span style="color: #B84F0C; font-weight: 700">・</span><span>広告が表示されなくなります</span></li>
+</ul>
+<p style="font-size: 13px; color: #6A5E55; margin-top: auto">一度の購入で、追加の支払いはありません。</p>
+</div>
+</div>
+</div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <p><a class="cta" href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611">App Store で見る</a></p>
-    <p style="margin-top:26px">
-      <a href="https://shoheicraftdev-design.github.io/recipe-log-support/">サポート・使い方</a>
-      <a href="https://shoheicraftdev-design.github.io/recipe-log-support/privacy.html">プライバシーポリシー</a>
-      <a href="https://shoheicraftdev-design.github.io/recipe-log-support/terms.html">利用規約</a>
-      <a href="mailto:shohei.craft.dev@gmail.com">お問い合わせ</a>
-    </p>
-    <p style="margin-top:18px">ShoheiCraftDev</p>
-  </div>
+<!-- データの扱い -->
+<section style="padding: 0 0 112px">
+<div class="wrap">
+<div style="background: #F7F2EC; border-radius: 24px; padding: 36px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 900">データの扱い</h2>
+<div class="cols2" style="gap: 28px; font-size: 14px; color: #4E443D; line-height: 1.85">
+<p>解析 SDK は入れていません。広告の表示に Google の広告 SDK（AdMob）を使っていて、トラッキングを許可した場合は広告識別子が使われます。許可しなくても使えます（広告の内容が関心に沿わなくなるだけです）。「レコログ Pro」を購入すると広告は表示されません。</p>
+<p>写真はアプリ内に複製せず、写真ライブラリの写真を参照します。iCloud 同期はご自身のプライベートな iCloud にのみ保存され、開発者を含む第三者はアクセスできません。</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- final CTA + footer -->
+<footer style="background: #1F1A17; color: #FFFFFF; padding: 96px 0 40px">
+<div class="wrap" style="display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center">
+<img src="images/appicon.png" alt="レコログ アプリアイコン" style="width: 88px; height: 88px; border-radius: 22px">
+<h2 style="margin: 0; font-size: clamp(24px, 3.2vw, 36px); line-height: 1.5; font-weight: 900">あのときの1本を、<br>次に作るときにも。</h2>
+<a class="cta-btn light" href="https://apps.apple.com/jp/app/%E3%83%AC%E3%82%B3%E3%83%AD%E3%82%B0/id6803313611">App Store で見る<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+<nav class="foot" aria-label="関連リンク" style="display: flex; flex-wrap: wrap; justify-content: center; column-gap: 28px; row-gap: 0; margin-top: 40px; font-size: 14px">
+<a href="https://shoheicraftdev-design.github.io/recipe-log-support/">サポート・使い方</a>
+<a href="https://shoheicraftdev-design.github.io/recipe-log-support/privacy.html">プライバシーポリシー</a>
+<a href="https://shoheicraftdev-design.github.io/recipe-log-support/terms.html">利用規約</a>
+<a href="mailto:shohei.craft.dev@gmail.com">お問い合わせ</a>
+</nav>
+<p style="font-size: 13px; color: #B5A89D">ShoheiCraftDev</p>
+</div>
 </footer>
 
+</div>
 </body>
 </html>

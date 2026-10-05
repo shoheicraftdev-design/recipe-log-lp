@@ -24,8 +24,8 @@ Sodato LP（`sodato-lp`）・GearDeban LP（`geardeban-lp`）・えも日LP（`e
 ## 素材
 
 `images/` のスクリーンショットは、アプリ側リポジトリ `recipe-log` の
-`docs/appstore/screenshots/6.5-inch/`（提出用・1284×2778）を長辺640pxへ縮小したもの。
-差し替える場合は元の 1284×2778 から作り直すこと。`appicon.png` は
+`docs/appstore/screenshots/6.9-inch/`（提出用・1320×2868）を長辺1200pxへ縮小したもの（2026-10-05 デザイン刷新で 6.5-inch・長辺640px から差し替え）。
+差し替える場合は元の 1320×2868 から作り直すこと。`appicon.png` は
 `RecipeLog/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png` の縮小（256px）。
 
 | ファイル | 元 |
